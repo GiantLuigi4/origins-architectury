@@ -52,6 +52,7 @@ dependencies {
 	//modCompileOnly "curse.maven:structuregel-378802:3268432"
 	//modCompileOnly "curse.maven:blueskies-312918:3385608"
 	modCompileOnly "curse.maven:culinaryconstruct-296676:3217589"
+	modCompileOnly "curse.maven:pehkui-319596:3351969"
 
 	implementation(project(path: ":common")) {
 		transitive = false

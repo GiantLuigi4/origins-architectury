@@ -3,6 +3,7 @@ package io.github.apace100.origins.mixin;
 import io.github.apace100.origins.access.EntityShapeContextAccessor;
 import io.github.apace100.origins.component.OriginComponent;
 import io.github.apace100.origins.power.PhasingPower;
+import io.github.apace100.origins.util.EntityUtils;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -51,7 +52,9 @@ public abstract class AbstractBlockStateMixin {
 
     @Unique
     private boolean isAbove(Entity entity, VoxelShape shape, BlockPos pos, boolean defaultValue) {
-        return entity.getY() > (double)pos.getY() + shape.getMax(Direction.Axis.Y) - (entity.isOnGround() ? 8.05/16.0 : 0.0015);
+//        return entity.getY() > (double)pos.getY() + shape.getMax(Direction.Axis.Y) - (entity.isOnGround() ? 8.05/16.0 : 0.0015);
+        if (entity.isOnGround()) return entity.getY() + EntityUtils.getStepHeight(entity) > pos.getY() + shape.getMax(Direction.Axis.Y);
+        else return entity.getY() > pos.getY() + shape.getMax(Direction.Axis.Y);
     }
 
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
